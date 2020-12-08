@@ -10,9 +10,11 @@ import {
   TextInputChangeEventData,
   View,
 } from 'react-native';
-
+import {IProperty} from '../models/Property';
 const SearchScreen = () => {
   const [searchTerm, setSearchTerm] = useState('london');
+  const [isLoading, setIsLoading] = useState(false);
+  const [properties, setProperties] = useState<IProperty[]>([]);
 
   function onSearchTermChange(
     event: NativeSyntheticEvent<TextInputChangeEventData>,
@@ -21,19 +23,43 @@ const SearchScreen = () => {
     setSearchTerm(event.nativeEvent.text);
   }
 
+  function getProperies() {
+    setIsLoading(true);
+    fetch(
+      `https://5f843a3c6b97440016f4f2dc.mockapi.io/properties?search=${searchTerm}`,
+    )
+      .then((response) => response.json())
+      .then((data: IProperty[]) => {
+        setProperties(data);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2000);
+      });
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.description}>Search for houses to buy!</Text>
       <Text style={styles.description}>Search by place, name or postcode!</Text>
       <View style={styles.flowRight}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder={'Search via name or postcode'}
-          underlineColorAndroid={'transparent'}
-          value={searchTerm}
-          onChange={onSearchTermChange}
-        />
-        <Button onPress={() => {}} title={'Go'} />
+        {isLoading ? (
+          <View>
+            <Text style={styles.loadingText}>Loading...</Text>
+          </View>
+        ) : (
+          <>
+            <TextInput
+              style={styles.searchInput}
+              placeholder={'Search via name or postcode'}
+              underlineColorAndroid={'transparent'}
+              value={searchTerm}
+              onChange={onSearchTermChange}
+              returnKeyType="search"
+              onSubmitEditing={getProperies}
+            />
+            <Button onPress={getProperies} title={'Go'} />
+          </>
+        )}
       </View>
       <Image
         source={require('../assets/images/house.png')}
@@ -78,6 +104,9 @@ const styles = StyleSheet.create({
   image: {
     width: 200,
     height: 200,
+  },
+  loadingText: {
+    fontSize: 20,
   },
 });
 
