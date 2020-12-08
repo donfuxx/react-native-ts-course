@@ -1,15 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
-  View,
+  Button,
+  Image,
+  NativeSyntheticEvent,
   SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
-  Button,
-  Image,
+  TextInputChangeEventData,
+  View,
 } from 'react-native';
 
 const SearchScreen = () => {
+  const [searchTerm, setSearchTerm] = useState('london');
+
+  function onSearchTermChange(
+    event: NativeSyntheticEvent<TextInputChangeEventData>,
+  ) {
+    console.log(`Current: ${searchTerm}, Next: ${event.nativeEvent.text}`);
+    setSearchTerm(event.nativeEvent.text);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.description}>Search for houses to buy!</Text>
@@ -19,6 +30,8 @@ const SearchScreen = () => {
           style={styles.searchInput}
           placeholder={'Search via name or postcode'}
           underlineColorAndroid={'transparent'}
+          value={searchTerm}
+          onChange={onSearchTermChange}
         />
         <Button onPress={() => {}} title={'Go'} />
       </View>
@@ -37,7 +50,7 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
     justifyContent: 'center',
-    alignItems: "center",
+    alignItems: 'center',
   },
   description: {
     fontSize: 18,
