@@ -6,7 +6,6 @@ import {
   Text,
   TextInput,
   Button,
-  Image,
 } from 'react-native';
 
 const SearchScreen = () => {
@@ -22,11 +21,6 @@ const SearchScreen = () => {
         />
         <Button onPress={() => {}} title={'Go'} />
       </View>
-      <Image
-        source={require('../assets/images/house.png')}
-        style={styles.image}
-        resizeMode="contain"
-      />
     </SafeAreaView>
   );
 };
@@ -34,10 +28,9 @@ const SearchScreen = () => {
 const styles = StyleSheet.create({
   container: {
     width: '80%',
+    justifyContent: 'center',
     marginLeft: 'auto',
     marginRight: 'auto',
-    justifyContent: 'center',
-    alignItems: "center",
   },
   description: {
     fontSize: 18,
@@ -61,10 +54,6 @@ const styles = StyleSheet.create({
     borderColor: '#48bbec',
     borderRadius: 8,
     color: '#48bbec',
-  },
-  image: {
-    width: 200,
-    height: 200,
   },
 });
 
