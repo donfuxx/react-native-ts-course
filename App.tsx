@@ -1,21 +1,22 @@
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import SearchScreen from './src/screens/SearchScreen';
+
+const AppStack = createStackNavigator();
 
 const App = () => {
   return (
-    <SafeAreaView>
-      <Text style={styles.description}>Search for houses to buy!</Text>
-    </SafeAreaView>
+    <NavigationContainer>
+      <AppStack.Navigator>
+        <AppStack.Screen
+          options={{title: 'Property Finder'}}
+          name="Search"
+          component={SearchScreen}
+        />
+      </AppStack.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  description: {
-    fontSize: 18,
-    textAlign: 'center',
-    color: '#656565',
-    marginTop: 65,
-  },
-});
 
 export default App;
