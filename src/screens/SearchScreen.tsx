@@ -13,8 +13,8 @@ import {useNavigation} from '@react-navigation/native';
 
 import {IProperty} from '../models/Property';
 import TextInput from '../components/TextInput';
+import {Destination} from '../navigation/types/Destination';
 
-import { Destination } from '../navigation/types/Destination';
 const SearchScreen = () => {
   const {navigate} = useNavigation();
   const [searchTerm, setSearchTerm] = useState('london');
@@ -39,7 +39,9 @@ const SearchScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.description}>Search for houses to buy!</Text>
-      <Text style={styles.description}>Search by place, name or postcode!</Text>
+      <Text testID="SecondaryText" style={styles.description}>
+        Search by place, name or postcode!
+      </Text>
       <View style={styles.flowRight}>
         <TextInput
           placeholder={'Search via name or postcode'}
@@ -48,8 +50,9 @@ const SearchScreen = () => {
           onChange={onSearchTermChange}
           returnKeyType="search"
           onSubmitEditing={getProperies}
+          testID="SearchInput"
         />
-        <Button onPress={getProperies} title={'Go'} />
+        <Button onPress={getProperies} title={'Go'} testID="SearchButton" />
       </View>
       <Image
         source={require('../assets/images/house.png')}
