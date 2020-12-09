@@ -10,11 +10,13 @@ import {
   TextInputChangeEventData,
   View,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+
 import {IProperty} from '../models/Property';
+import { Destination } from '../navigation/types/Destination';
 const SearchScreen = () => {
+  const {navigate} = useNavigation();
   const [searchTerm, setSearchTerm] = useState('london');
-  const [isLoading, setIsLoading] = useState(false);
-  const [properties, setProperties] = useState<IProperty[]>([]);
 
   function onSearchTermChange(
     event: NativeSyntheticEvent<TextInputChangeEventData>,
@@ -24,16 +26,12 @@ const SearchScreen = () => {
   }
 
   function getProperies() {
-    setIsLoading(true);
     fetch(
       `https://5f843a3c6b97440016f4f2dc.mockapi.io/properties?search=${searchTerm}`,
     )
       .then((response) => response.json())
       .then((data: IProperty[]) => {
-        setProperties(data);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 2000);
+        navigate(Destination.SearchResults, {data});
       });
   }
 
@@ -42,24 +40,16 @@ const SearchScreen = () => {
       <Text style={styles.description}>Search for houses to buy!</Text>
       <Text style={styles.description}>Search by place, name or postcode!</Text>
       <View style={styles.flowRight}>
-        {isLoading ? (
-          <View>
-            <Text style={styles.loadingText}>Loading...</Text>
-          </View>
-        ) : (
-          <>
-            <TextInput
-              style={styles.searchInput}
-              placeholder={'Search via name or postcode'}
-              underlineColorAndroid={'transparent'}
-              value={searchTerm}
-              onChange={onSearchTermChange}
-              returnKeyType="search"
-              onSubmitEditing={getProperies}
-            />
-            <Button onPress={getProperies} title={'Go'} />
-          </>
-        )}
+        <TextInput
+          style={styles.searchInput}
+          placeholder={'Search via name or postcode'}
+          underlineColorAndroid={'transparent'}
+          value={searchTerm}
+          onChange={onSearchTermChange}
+          returnKeyType="search"
+          onSubmitEditing={getProperies}
+        />
+        <Button onPress={getProperies} title={'Go'} />
       </View>
       <Image
         source={require('../assets/images/house.png')}
