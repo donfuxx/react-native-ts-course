@@ -6,5 +6,3 @@ export type SearchResultsRouteProp = RouteProp<
   AppStackParamList,
   Destination.SearchResults
 >;
-
-export type PropertyRouteProp = RouteProp<AppStackParamList, Destination.Property>;

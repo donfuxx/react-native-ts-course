@@ -1,4 +1,3 @@
-import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
   Image,
@@ -7,10 +6,7 @@ import {
   Text,
   FlatList,
   View,
-  Pressable,
 } from 'react-native';
-import {IProperty} from '../models/Property';
-import {Destination} from '../navigation/types/Destination';
 import {SearchResultsRouteProp} from '../navigation/types/RouteProps';
 
 interface ISearchResultsScreenProps {
@@ -18,41 +14,28 @@ interface ISearchResultsScreenProps {
 }
 
 interface IListItemProps {
-  data: IProperty;
-  onPress: () => void;
+  address: string;
+  image: string;
+  price: string;
 }
 
-const Item = ({data, onPress}: IListItemProps) => {
-  const {address, image, price} = data;
-  return (
-    <Pressable onPress={onPress}>
-      <View style={styles.item}>
-        <Image source={{uri: image}} style={styles.itemImage} />
-        <View style={styles.itemInformation}>
-          <Text style={styles.itemPrice}>£{price}</Text>
-          <Text style={styles.itemAddress}>{address}</Text>
-        </View>
-      </View>
-    </Pressable>
-  );
-};
+const Item = ({address, image, price}: IListItemProps) => (
+  <View style={styles.item}>
+    <Image source={{uri: image}} style={styles.itemImage} />
+    <View style={styles.itemInformation}>
+      <Text style={styles.itemPrice}>£{price}</Text>
+      <Text style={styles.itemAddress}>{address}</Text>
+    </View>
+  </View>
+);
 
 const SearchResultsScreen = (props: ISearchResultsScreenProps) => {
-  const {navigate} = useNavigation();
-
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         style={styles.flastList}
         data={props.route.params.data || []}
-        renderItem={({item}) => (
-          <Item
-            data={item}
-            onPress={() => {
-              navigate(Destination.Property, {data: item});
-            }}
-          />
-        )}
+        renderItem={({item}) => <Item {...item} />}
         keyExtractor={(item) => item.id}
       />
     </SafeAreaView>

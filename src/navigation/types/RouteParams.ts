@@ -4,5 +4,4 @@ import {Destination} from './Destination';
 export type AppStackParamList = {
   [Destination.Search]: undefined;
   [Destination.SearchResults]: {data: IProperty[] | undefined};
-  [Destination.Property]: {data: IProperty};
 };
