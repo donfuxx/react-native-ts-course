@@ -12,6 +12,8 @@ import {
 import {IProperty} from '../models/Property';
 import {Destination} from '../navigation/types/Destination';
 import {SearchResultsRouteProp} from '../navigation/types/RouteProps';
+import {useSelector} from 'react-redux';
+import {RootState} from '../store';
 
 interface ISearchResultsScreenProps {
   route: SearchResultsRouteProp;
@@ -23,7 +25,10 @@ interface IListItemProps {
 }
 
 const Item = ({data, onPress}: IListItemProps) => {
-  const {address, image, price} = data;
+  const {favourites} = useSelector((state: RootState) => state.favourites);
+  const {id, address, image, price} = data;
+  const isLiked = favourites.some(fId => fId === id);
+
   return (
     <Pressable onPress={onPress}>
       <View style={styles.item}>
@@ -31,6 +36,7 @@ const Item = ({data, onPress}: IListItemProps) => {
         <View style={styles.itemInformation}>
           <Text style={styles.itemPrice}>£{price}</Text>
           <Text style={styles.itemAddress}>{address}</Text>
+          {isLiked && <Text style={styles.liked}>Liked</Text>}
         </View>
       </View>
     </Pressable>
@@ -95,6 +101,13 @@ const styles = StyleSheet.create({
     width: 100,
     height: 75,
   },
+  liked: {
+    fontWeight: 'bold',
+    color: 'green',
+    backgroundColor: 'pink',
+    fontSize: 20,
+    textAlign: 'center'
+  }
 });
 
 export default SearchResultsScreen;
