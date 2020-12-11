@@ -12,7 +12,7 @@ import {
 import {IProperty} from '../models/Property';
 import {Destination} from '../navigation/types/Destination';
 import {SearchResultsRouteProp} from '../navigation/types/RouteProps';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {RootState} from '../store';
 
 interface ISearchResultsScreenProps {

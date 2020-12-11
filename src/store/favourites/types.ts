@@ -4,5 +4,5 @@ export interface IFavouritesState {
 
 
 export interface IFavouritePayload {
-  data: string
+  id: string
 }

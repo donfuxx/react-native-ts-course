@@ -12,15 +12,15 @@ const favourites = createSlice({
   reducers: {
     like(
       state: IFavouritesState,
-      { payload: { data } }: PayloadAction<IFavouritePayload>
+      { payload: { id } }: PayloadAction<IFavouritePayload>
     ) {
-      state.favourites.push(data)
+      state.favourites.push(id)
     },
     unlike(
       state: IFavouritesState,
-      { payload: { data } }: PayloadAction<IFavouritePayload>
+      { payload: { id } }: PayloadAction<IFavouritePayload>
       ) {
-        state.favourites = state.favourites.filter(f => f !== data)
+        state.favourites = state.favourites.filter(f => f !== id)
     },
   },
 });

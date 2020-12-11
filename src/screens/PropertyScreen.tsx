@@ -32,7 +32,7 @@ const PropertyScreen = (props: IPropertyScreenProps) => {
             Liked
           </Text>
         }
-        <Button onPress={() => dispatch(func({data: id}))} title={isLiked ? 'Unlike' : 'Like' } />
+        <Button onPress={() => dispatch(func({id}))} title={isLiked ? 'Unlike' : 'Like' } />
       </View>
     </View>
   );
