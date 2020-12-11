@@ -1,13 +1,22 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View, Button} from 'react-native';
 import {PropertyRouteProp} from '../navigation/types/RouteProps';
+import {useSelector, useDispatch} from 'react-redux';
+import {RootState} from '../store';
+import {like, unlike} from '../store/favourites';
 
 interface IPropertyScreenProps {
   route: PropertyRouteProp;
 }
 
 const PropertyScreen = (props: IPropertyScreenProps) => {
-  const {image, price, address, description} = props.route.params.data;
+  const {favourites} = useSelector((state: RootState) => state.favourites);
+  const dispatch = useDispatch();
+  
+  const {id, image, price, address, description} = props.route.params.data;
+  const isLiked = favourites.some(fId => fId === id);
+  const func = isLiked ? unlike : like;
+  
   return (
     <View style={[styles.item, styles.container]}>
       <View style={styles.imageWrapper}>
@@ -17,6 +26,13 @@ const PropertyScreen = (props: IPropertyScreenProps) => {
       <View style={styles.bottomText}>
         <Text style={styles.itemAddress}>{address}</Text>
         <Text style={styles.itemAddress}>{description}</Text>
+        {
+          isLiked &&
+          <Text style={styles.liked}>
+            Liked
+          </Text>
+        }
+        <Button onPress={() => dispatch(func({data: id}))} title={isLiked ? 'Unlike' : 'Like' } />
       </View>
     </View>
   );
@@ -60,6 +76,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     flexWrap: 'wrap',
   },
+  liked: {
+    fontWeight: 'bold',
+    color: 'green',
+    backgroundColor: 'pink',
+    fontSize: 20,
+    textAlign: 'center'
+  }
 });
 
 export default PropertyScreen;
