@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
     justifyContent: 'center',
-    alignItems: "center",
+    alignItems: 'center',
   },
   description: {
     fontSize: 18,
