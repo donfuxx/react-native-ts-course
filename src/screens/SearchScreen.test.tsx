@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchScreen from './SearchScreen';
-import {fireEvent, render} from '@testing-library/react-native';
+import {fireEvent} from '@testing-library/react-native';
 import {act} from 'react-test-renderer';
 import {useNavigation} from '@react-navigation/native';
 import {renderComponent} from '../utilities/testintUtils';

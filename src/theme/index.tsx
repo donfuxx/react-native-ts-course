@@ -1,5 +1,5 @@
-import React, { createContext } from 'react';
-import { ITheme, ThemeType } from './types';
+import React, {createContext} from 'react';
+import {ITheme, ThemeType} from './types';
 import getTheme from './themes';
 
 interface IThemeContext {
@@ -14,10 +14,10 @@ interface IThemeProviderProps {
 export const ThemeContext = createContext({} as IThemeContext);
 
 export const ThemeProvider = (props: IThemeProviderProps) => {
-  const { children, theme } = props;
+  const {children, theme} = props;
 
   return (
-    <ThemeContext.Provider value={{ theme: getTheme(theme) }}>
+    <ThemeContext.Provider value={{theme: getTheme(theme)}}>
       {children}
     </ThemeContext.Provider>
   );

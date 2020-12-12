@@ -27,7 +27,7 @@ interface IListItemProps {
 const Item = ({data, onPress}: IListItemProps) => {
   const {favourites} = useSelector((state: RootState) => state.favourites);
   const {id, address, image, price} = data;
-  const isLiked = favourites.some(fId => fId === id);
+  const isLiked = favourites.some((fId) => fId === id);
 
   return (
     <Pressable onPress={onPress}>
@@ -106,8 +106,8 @@ const styles = StyleSheet.create({
     color: 'green',
     backgroundColor: 'pink',
     fontSize: 20,
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
 
 export default SearchResultsScreen;
