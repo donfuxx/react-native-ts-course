@@ -13,7 +13,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 
 import {IProperty} from '../models/Property';
-import { Destination } from '../navigation/types/Destination';
+import {Destination} from '../navigation/types/Destination';
 const SearchScreen = () => {
   const {navigate} = useNavigation();
   const [searchTerm, setSearchTerm] = useState('london');
