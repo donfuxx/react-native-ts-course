@@ -12,11 +12,11 @@ interface IPropertyScreenProps {
 const PropertyScreen = (props: IPropertyScreenProps) => {
   const {favourites} = useSelector((state: RootState) => state.favourites);
   const dispatch = useDispatch();
-  
+
   const {id, image, price, address, description} = props.route.params.data;
-  const isLiked = favourites.some(fId => fId === id);
+  const isLiked = favourites.some((fId) => fId === id);
   const func = isLiked ? unlike : like;
-  
+
   return (
     <View style={[styles.item, styles.container]}>
       <View style={styles.imageWrapper}>
@@ -26,13 +26,11 @@ const PropertyScreen = (props: IPropertyScreenProps) => {
       <View style={styles.bottomText}>
         <Text style={styles.itemAddress}>{address}</Text>
         <Text style={styles.itemAddress}>{description}</Text>
-        {
-          isLiked &&
-          <Text style={styles.liked}>
-            Liked
-          </Text>
-        }
-        <Button onPress={() => dispatch(func({id}))} title={isLiked ? 'Unlike' : 'Like' } />
+        {isLiked && <Text style={styles.liked}>Liked</Text>}
+        <Button
+          onPress={() => dispatch(func({id}))}
+          title={isLiked ? 'Unlike' : 'Like'}
+        />
       </View>
     </View>
   );
@@ -81,8 +79,8 @@ const styles = StyleSheet.create({
     color: 'green',
     backgroundColor: 'pink',
     fontSize: 20,
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
 
 export default PropertyScreen;
