@@ -14,7 +14,7 @@ import {IProperty} from '../models/Property';
 const SearchScreen = () => {
   const [searchTerm, setSearchTerm] = useState('london');
   const [isLoading, setIsLoading] = useState(false);
-  const [properties, setProperties] = useState<IProperty[]>([]);
+  const [, setProperties] = useState<IProperty[]>([]);
 
   function onSearchTermChange(
     event: NativeSyntheticEvent<TextInputChangeEventData>,
