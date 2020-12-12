@@ -7,12 +7,7 @@ export type IInputFieldProps = Omit<TextInputProps, 'style'>;
 function CustomTextInput(props: IInputFieldProps) {
   const styles = useStyles();
 
-  return (
-    <TextInput
-      {...props}
-      style={styles.input}
-    />
-  );
+  return <TextInput {...props} style={styles.input} />;
 }
 
 export default CustomTextInput;

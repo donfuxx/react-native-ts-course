@@ -1,4 +1,4 @@
-import { ITheme, ThemeType } from '../../theme/types';
+import {ITheme, ThemeType} from '../../theme/types';
 import PrimaryTheme from './primary';
 
 const themes = new Map<ThemeType, ITheme>();

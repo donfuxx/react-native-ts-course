@@ -6,7 +6,7 @@ export default function useStyles() {
   const {theme} = useContext(ThemeContext);
 
   const color = Platform.OS === 'ios' ? theme.colors.blue : theme.colors.grey;
-  
+
   return StyleSheet.create({
     input: {
       height: 36,
