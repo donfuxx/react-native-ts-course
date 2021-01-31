@@ -5,9 +5,10 @@
   "scripts": {
     "tsc": "tsc -w",
     "android": "react-native run-android",
+    "detox android": "detox build --configuration android && detox test --configuration android --verbose --debug",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
@@ -35,8 +36,10 @@
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
     "babel-jest": "^25.1.0",
+    "detox": "^18.2.2",
     "eslint": "^6.5.1",
     "jest": "^25.1.0",
+    "jest-circus": "^26.6.3",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-test-renderer": "16.13.1",
     "typescript": "^3.8.3"
@@ -50,6 +53,14 @@
       "jsx",
       "json",
       "node"
-    ]
+    ], 
+    "coverageThreshold": {
+      "global": {
+        "branches": 75,
+        "functions": 75,
+        "lines": 75,
+        "statements": 75
+      }
+    }
   }
 }
